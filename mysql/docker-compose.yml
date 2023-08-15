@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1074
+      MYSQL_DATABASE: rezaul
+      MYSQL_USER: rezaul
+      MYSQL_PASSWORD: 1075
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: 1074
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+
